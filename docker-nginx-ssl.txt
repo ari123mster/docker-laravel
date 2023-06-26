@@ -1,0 +1,8 @@
+FROM nginx:latest
+RUN apt-get update && apt-get install -y certbot python3-certbot-nginx
+RUN echo "certbot --nginx -d devhotel.xfocus.id --non-interactive --agree-tos -m mudasuryo@gmail.com" > /tmp/certbot_command.sh
+RUN chmod +x /tmp/certbot_command.sh
+RUN /tmp/certbot_command.sh
+EXPOSE 80
+EXPOSE 443
+CMD nginx -g 'daemon off;' && nginx -s reload
